@@ -12,8 +12,26 @@ public class Day2 {
 		for (int i = 0; i < data.length; i++) {
 			data[i] = Integer.parseInt(input[i]);
 		}
-		data[1] = 12;
-		data[2] = 2;
+		System.out.println("Part 1)");
+		int[] part1 = Arrays.copyOf(data, data.length);
+		//part 1 noun = 2 verb = 12
+		System.out.println(calculate(part1, 12, 2)[0]);
+		for(int verb = 0; verb < 100; verb++) {
+			for(int noun = 0; noun < 100; noun++) {
+				int[] part2 = Arrays.copyOf(data, data.length);
+				int[] temp = calculate(part2, noun, verb);
+				if(temp[0] == 19690720) {
+					System.out.println("Part 2)");
+					System.out.printf("FOUND NOUN = %d VERB = %d\n", noun, verb);
+					System.out.printf("100 * %d + %d = %d", noun, verb, 100 * noun + verb);
+				}
+			}
+		}
+	}
+	
+	public static int[] calculate(int[] data, int noun, int verb) {
+		data[1] = noun;
+		data[2] = verb;
 		int i = 0;
 		while (i < data.length) {
 			int opcode = data[i];
@@ -34,11 +52,9 @@ public class Day2 {
 				data[positionToStore] = a * b;
 				i += 4;
 			} else if (opcode == 99) {
-				System.out.println("Opcode 99 reached - terminating");
 				break;
 			}
 		}
-		System.out.println(Arrays.toString(data).replaceAll(" ", ""));
-		System.out.println("Number at position 0 is " + data[0]);
+		return data;
 	}
 }
