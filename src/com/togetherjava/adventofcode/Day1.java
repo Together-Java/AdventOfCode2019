@@ -13,7 +13,6 @@ public class Day1 {
 		double part2 = input.get().map(Day1::recursiveCalculateFuel).reduce(0D, Double::sum);
 		System.out.println("Part 1 answer: " + part1);
 		System.out.println("Part 2 answer: " + part2);
-
 	}
 
 	public static double recursiveCalculateFuel(double mass) {
