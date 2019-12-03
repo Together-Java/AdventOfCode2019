@@ -22,11 +22,12 @@ public class Day3 {
 		int recordDistance = Integer.MAX_VALUE;
 		for (Tile t : wireA) {
 			int distance = getManhattanDistance(0, 0, t.getX(), t.getY());
+			//check if doesn't equal zero because the 2 tiles that intersect closest to the main port IS the main port
 			if (distance < recordDistance && distance != 0) {
 				recordDistance = distance;
 			}
 		}
-		System.out.println("Part 1 answer) redacted");
+		System.out.println("Part 1 answer) " + recordDistance);
 		System.out.printf("Done in %d ms", System.currentTimeMillis() - then);
 	}
 
