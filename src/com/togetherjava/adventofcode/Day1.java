@@ -9,8 +9,8 @@ public class Day1 {
 
 	public static void main(String[] args) {
 		Supplier<Stream<Double>> input = () -> ResourceLoader.getInput("Day1Inputs.txt").stream().map(Double::parseDouble);
-		double part1 = input.get().map(Day1::calculateFuel).reduce(0D, Double::sum);
-		double part2 = input.get().map(Day1::recursiveCalculateFuel).reduce(0D, Double::sum);
+		double part1 = input.get().mapToDouble(Day1::calculateFuel).sum();
+		double part2 = input.get().mapToDouble(Day1::recursiveCalculateFuel).sum();
 		System.out.println("Part 1 answer: " + part1);
 		System.out.println("Part 2 answer: " + part2);
 	}
