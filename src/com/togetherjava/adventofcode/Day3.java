@@ -1,4 +1,4 @@
-package com.togetherjava.adventofcode.day3;
+package com.togetherjava.adventofcode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,26 +63,94 @@ public class Day3 {
 			String direction = w.substring(0, 1);
 			int moves = Integer.parseInt(w.substring(1));
 			if (direction.equals("U")) {
-				for (int i = y; i > y - moves; i--) {
-					wire.add(new Tile(x, i));
-				}
+				wire.addAll(getTilesBottomToTop(x, y, moves));
 				y -= moves;
 			} else if (direction.equals("D")) {
-				for (int i = y; i < y + moves; i++) {
-					wire.add(new Tile(x, i));
-				}
+				wire.addAll(getTilesTopToBottom(x, y, moves));
 				y += moves;
 			} else if (direction.equals("L")) {
-				for (int i = x; i > x - moves; i--) {
-					wire.add(new Tile(i, y));
-				}
+				wire.addAll(getTilesRightToLeft(x, y, moves));
 				x -= moves;
 			} else if (direction.equals("R")) {
-				for (int i = x; i < x + moves; i++) {
-					wire.add(new Tile(i, y));
-				}
+				wire.addAll(getTilesLeftToRight(x, y, moves));
 				x += moves;
 			}
+		}
+	}
+	
+	public static List<Tile> getTilesLeftToRight(int x, int y, int moves) {
+		List<Tile> tiles = new ArrayList<>();
+		for(int i = x; i < x + moves; i++) {
+			tiles.add(new Tile(i, y));
+		}
+		return tiles;
+	}
+	
+	public static List<Tile> getTilesRightToLeft(int x, int y, int moves) {
+		List<Tile> tiles = new ArrayList<>();
+		for(int i = x; i > x - moves; i--) {
+			tiles.add(new Tile(i, y));
+		}
+		return tiles;
+	}
+	
+	public static List<Tile> getTilesTopToBottom(int x, int y, int moves) {
+		List<Tile> tiles = new ArrayList<>();
+		for(int i = y; i < y + moves; i++) {
+			tiles.add(new Tile(x, i));
+		}
+		return tiles;
+	}
+	
+	public static List<Tile> getTilesBottomToTop(int x, int y, int moves) {
+		List<Tile> tiles = new ArrayList<>();
+		for(int i = y; i > y - moves; i--) {
+			tiles.add(new Tile(x, i));
+		}
+		return tiles;
+	}
+	
+	private static class Tile {
+		
+		private int x;
+		private int y;
+		
+		public Tile(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + x;
+			result = prime * result + y;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Tile other = (Tile) obj;
+			if (x != other.x)
+				return false;
+			if (y != other.y)
+				return false;
+			return true;
 		}
 	}
 }

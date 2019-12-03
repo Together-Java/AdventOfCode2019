@@ -6,17 +6,29 @@ import com.togetherjava.adventofcode.util.ResourceLoader;
 
 public class Day2 {
 
-	public static void main(String[] args) {
-		String[] input = ResourceLoader.getInput("Day2Inputs.txt").get(0).split(",");
-		int[] data = new int[input.length];
-		for (int i = 0; i < data.length; i++) {
+	private static String[] input = ResourceLoader.getInput("Day2Inputs.txt").get(0).split(",");
+	private static int[] data = new int[input.length];
+	
+	static {
+		for(int i = 0; i < data.length; i++) {
 			data[i] = Integer.parseInt(input[i]);
 		}
+	}
+	
+	public static void main(String[] args) {
+		part1();
+		part2();
+	}
+	
+	public static void part1() {
 		int[] dataClone = Arrays.copyOf(data, data.length);
 		System.out.println("Part 1) " + calculate(dataClone, 12, 2)[0]);
+	}
+	
+	public static void part2() {
 		for(int verb = 0; verb < 100; verb++) {
 			for(int noun = 0; noun < 100; noun++) {
-				dataClone = Arrays.copyOf(data, data.length);
+				int[] dataClone = Arrays.copyOf(data, data.length);
 				int[] part2 = calculate(dataClone, noun, verb);
 				if(part2[0] == 19690720) {
 					System.out.printf("Part 2) 100 * %d + %d = %d", noun, verb, 100 * noun + verb);
